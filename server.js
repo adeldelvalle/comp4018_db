@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
 const path = require('path');
+const http = require('http');
 
 const app = express();
 app.use(bodyParser.json());
@@ -29,9 +30,9 @@ db.connect((err) => {
   console.log('Connected to database');
 });
 
-// Aquí es donde agregarás tus rutas para manejar las solicitudes de la aplicación CV
+// Aqui­ es donde agregar¡s tus rutas para manejar las solicitudes de la aplicacin CV
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
