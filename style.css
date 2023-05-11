@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  
+  button {
+    display: block;
+    margin-bottom: 20px;
+    background-color: #3a3a3a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #555;
+  }
+  
+  .container {
+    margin-top: 20px;
+  }
+  
+  .col-md-6 {
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+  }
+  
+  .cv-section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .cv-section-content {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
