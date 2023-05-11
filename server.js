@@ -24,7 +24,7 @@ db.connect((err) => {
 
 // Aquí es donde agregarás tus rutas para manejar las solicitudes de la aplicación CV
 
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
