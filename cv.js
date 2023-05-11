@@ -126,7 +126,7 @@ class CurriculumVitae {
     referencias
     );
 
-    fetch("http://csmath.uprm.edu:3000/api/cv", {
+    fetch("http://csmath.uprm.edu:3001/api/cv", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -136,7 +136,7 @@ class CurriculumVitae {
   .then((response) => response.json())
   .then((data) => console.log(data))
   .catch((error) => console.error("Error:", error));
-  
+
     document.getElementById("cv").innerHTML = cv.mostrarHTML();
   });
   
