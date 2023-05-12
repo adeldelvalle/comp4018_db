@@ -9,7 +9,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 // Serve static files from the 'public' directory
-app.use('/mynode', express.static(path.join(__dirname, 'public')));
+app.get('/mynode', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
 
 
 
