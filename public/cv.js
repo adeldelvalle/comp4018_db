@@ -139,7 +139,7 @@ class CurriculumVitae {
     
       // Send the data to the server
       try {
-        const response = await fetch('http://csmath.uprm.edu:3001/saveCV', {
+        const response = await fetch('/mynode/saveCV', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
