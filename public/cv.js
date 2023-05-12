@@ -126,16 +126,37 @@ class CurriculumVitae {
     referencias
     );
 
-    fetch("http://csmath.uprm.edu:3001/api/cv", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(cv),
-})
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.error("Error:", error));
+    document.getElementById('crearCV').addEventListener('click', async () => {
+      // Get data from the input fields
+      const nombre = document.getElementById('nombre').value;
+      // ... get other input values
+    
+      // Prepare the data to be sent to the server
+      const data = {
+        nombre: nombre,
+        // ... include other input values
+      };
+    
+      // Send the data to the server
+      try {
+        const response = await fetch('http://csmath.uprm.edu:3001/saveCV', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+    
+        if (response.ok) {
+          // Handle successful response
+        } else {
+          // Handle error response
+        }
+      } catch (error) {
+        // Handle network error
+      }
+    });
+    
 
     document.getElementById("cv").innerHTML = cv.mostrarHTML();
   });
