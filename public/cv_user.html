@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV</title>
+  <link rel="stylesheet" href="cv_user_styles.css">
+</head>
+<body>
+  <div class="container">
+    <h2 id="preview-title">Vista Previa del Resumen</h2>
+    <h2 id="user-name"></h2>
+    
+    <section id="education">
+      <h3>Educación</h3>
+      <ul id="education-list" onclick="makeEditable(event)"></ul>
+    </section>
+    
+    <section id="work-experience">
+      <h3>Experiencia Laboral</h3>
+      <ul id="work-experience-list"></ul>
+    </section>
+    
+    <section id="skills">
+      <h3>Habilidades</h3>
+      <ul id="skills-list"></ul>
+    </section>
+    
+    <section id="languages">
+      <h3>Idiomas</h3>
+      <ul id="languages-list"></ul>
+    </section>
+    
+    <section id="certifications">
+      <h3>Certificaciones</h3>
+      <ul id="certifications-list"></ul>
+    </section>
+    
+    <section id="references">
+      <h3>Referencias</h3>
+      <ul id="references-list"></ul>
+    </section>
+  </div>
+
+  <script src="cv_user.js"></script>
+</body>
+</html>

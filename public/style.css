@@ -1,50 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+  color: #333;
+}
+
+.main-title,
+.cv-table-title {
+  font-family: 'Raleway', sans-serif;
+}
+
+.main-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  color: #6a097d;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.form-wrapper {
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cv-display {
+  background: linear-gradient(135deg, #a6c1ee, #fbc2eb);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+input,
+textarea,
+select {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+button {
+  display: block;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #b8c6db, #f5f7fa);
+  color: #333;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #b8c6db, #f5f7fa, #b8c6db);
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.cv-table-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #6a097d;
+  text-transform: uppercase;
+}
+
+.cv-table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#cv-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+#cv-list li {
+  background: linear-gradient(135deg, #a6c1ee, #fbc2eb);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+#cv-list li:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 576px) {
+  #cv-list {
+    flex-direction: column;
   }
-  
-  input,
-  textarea {
-    display: block;
-    width: 100%;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px;
-  }
-  
-  button {
-    display: block;
-    margin-bottom: 20px;
-    background-color: #3a3a3a;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #555;
-  }
-  
-  .container {
-    margin-top: 20px;
-  }
-  
-  .col-md-6 {
-    padding: 20px;
-    border: 1px solid #eee;
-    border-radius: 5px;
-  }
-  
-  .cv-section-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .cv-section-content {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
+}
