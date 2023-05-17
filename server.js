@@ -28,7 +28,7 @@ db.connect((err) => {
   console.log('Connected to database');
 });
 
-app.post('/saveCV', (req, res) => {
+app.post('/mynode/saveCV', (req, res) => {
     const data = req.body;
     const sqlUsuario = `
       INSERT INTO Usuario (nombre, email, telefono)
@@ -175,7 +175,7 @@ function saveCertificacion(cer, usuarioId) {
     });
   }
 
-  app.get('/fetchAllCVs', async (req, res) => {
+  app.get('/mynode/fetchAllCVs', async (req, res) => {
     const sql = `
       SELECT id, nombre
       FROM Usuario
@@ -191,7 +191,7 @@ function saveCertificacion(cer, usuarioId) {
     });
   });
 
-  app.get('/fetchCV/:id', async (req, res) => {
+  app.get('/mynode/fetchCV/:id', async (req, res) => {
     const userId = req.params.id;
     const cvData = {};
   
