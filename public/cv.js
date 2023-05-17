@@ -52,18 +52,29 @@ class CurriculumVitae {
   }
   
   
-  mostrarHTML() {
+  mostrarHTML(config = {}) {
+    
+
+
     let cvHTML = `
       <h2>${this.nombre}</h2>
       <p>Email: ${this.email}</p>
       <p>Teléfono: ${this.telefono}</p>
-      <div class="cv-section">
+      `;
+
+      if (config.mostrarEducacion) {
+        cvHTML +=  `
+        <div class="cv-section">
         <h3>Educación</h3>
         <p>Institución: ${this.institucion}</p>
         <p>Título: ${this.titulo}</p>
         <p>Fecha de inicio: ${this.fechaInicioEducacion}</p>
         <p>Fecha de fin: ${this.fechaFinEducacion}</p>
-      </div>
+      </div>`;
+      }
+
+      if (config.mostrarExperienciaLaboral) {
+         cvHTML += `
       <div class="cv-section">
         <h3>Experiencia Laboral</h3>
         <p>Empresa: ${this.empresa}</p>
@@ -72,60 +83,71 @@ class CurriculumVitae {
         <p>Fecha de fin: ${this.fechaFinExperiencia}</p>
         <p>Tipo: ${this.tipo}</p>
         <p>Descripción: ${this.descripcion}</p>
-      </div>
+      </div>`;
+      }
+
+      if (config.mostrarExperienciaProyectos) {
+         cvHTML += `
       <div class="cv-section">
         <h3>Experiencia en Proyectos</h3>
         <p>Proyecto: ${this.proyecto}</p>
         <p>Rol: ${this.rol}</p>
       </div>
-      <div class="cv-section">
-        <h3>Habilidades</h3>
-        <ul>
-    `;
-
-    this.habilidades.forEach((item) => {
-      cvHTML += `<li>${item}</li>`;
-    });
-
-    cvHTML += `
-        </ul>
-      </div>
-      <div class="cv-section">
-        <h3>Idiomas</h3>
-        <ul>
-    `;
-
-    this.idiomas.forEach((item) => {
-      cvHTML += `<li>${item}</li>`;
-    });
-
-    cvHTML += `
-        </ul>
-      </div>
-      <div class="cv-section">
-        <h3>Certificaciones</h3>
-        <ul>
-    `;
-
-    this.certificaciones.forEach((item) => {
-      cvHTML += `<li>${item}</li>`;
-    });
-
-    cvHTML += `
-        </ul>
-      </div>
-      <div class="cv-section">
-        <h3>Referencias</h3>
-        <ul>
-    `;
-
-    this.referencias.forEach((item) => {
-      cvHTML += `<li>${item}</li>`;
-    });
-
-    cvHTML += "</ul></div>";
-
-    return cvHTML;
+    `;}
+    
+    if (config.mostrarHabilidades) {
+      cvHTML += `<div class="cv-section">
+      <h3>Habilidades</h3>
+      <ul>`;
+  
+      this.habilidades.forEach((item) => {
+        cvHTML += `<li>${item}</li>`;
+      });
+  
+      cvHTML += `</ul>
+      </div>`;
+    }
+  
+    if (config.mostrarIdiomas) {
+      cvHTML += `<div class="cv-section">
+      <h3>Idiomas</h3>
+      <ul>`;
+  
+      this.idiomas.forEach((item) => {
+        cvHTML += `<li>${item}</li>`;
+      });
+  
+      cvHTML += `</ul>
+      </div>`;
+    }
+  
+    if (config.mostrarCertificaciones) {
+      cvHTML += `<div class="cv-section">
+      <h3>Certificaciones</h3>
+      <ul>`;
+  
+      this.certificaciones.forEach((item) => {
+        cvHTML += `<li>${item}</li>`;
+      });
+  
+      cvHTML += `</ul>
+      </div>`;
+    }
+  
+    if (config.mostrarReferencias) {
+      cvHTML += `<div class="cv-section">
+      <h3>Referencias</h3>
+      <ul>`;
+  
+      this.referencias.forEach((item) => {
+        cvHTML += `<li>${item}</li>`;
+      });
+  
+      cvHTML += `</ul>
+      </div>`;
+    }
+  
+    return cvHTML;  
     }
   }
 
@@ -187,8 +209,8 @@ class CurriculumVitae {
       this.nivelHabilidad = nivelHabilidad;
       this.nivelIdioma = nivelIdioma;
     }
-    mostrarHTML() {
-      let cvHTML = super.mostrarHTML();
+    mostrarHTML(config) {
+      let cvHTML = super.mostrarHTML(config);
   
       cvHTML += `
         <div class="cv-section">
@@ -232,6 +254,8 @@ class CurriculumVitae {
     
   }
 
+  
+  
   function mostrarNombresDeCVs(cvs) {
     const nombresContainer = document.getElementById("nombresDeCVs");
     cvs.forEach((cv) => {
@@ -272,11 +296,24 @@ class CurriculumVitae {
     window.location.href = `cv_user.html?userId=${userId}`;
   }
   
+
+  function descargarCVEnPDF() {
+    const cvContainer = document.getElementById("cv");
+    const pdf = new jsPDF();
+    
+    pdf.fromHTML(cvContainer, 15, 15, {
+      width: 170,
+    });
+  
+    pdf.save("CV.pdf");
+  }
   
 
-  
-  document.getElementById("crearCV").addEventListener("click", async function () {
-    const nombre = document.getElementById("nombre").value;
+  document.getElementById("descargarPDF").addEventListener("click", descargarCVEnPDF);
+
+
+function obtenerValoresFormulario() {
+  const nombre = document.getElementById("nombre").value;
     const email = document.getElementById("email").value;
     const telefono = document.getElementById("telefono").value;
     const institucion = document.getElementById("institucion").value;
@@ -304,9 +341,6 @@ class CurriculumVitae {
     const telRel = document.getElementById("telRel").value;
     const emailRel = document.getElementById("emailRel").value;
 
-
-
-  
     const cv = new CurriculumVitaePremium(
       nombre,
       email,
@@ -335,10 +369,79 @@ class CurriculumVitae {
       nivelHabilidad,
       nivelIdioma
     );
+
+    return cv;
+
+}
+
+function actualizarVistaCV() {
+
+  // Crea una instancia de CurriculumVitae
+  let cv = obtenerValoresFormulario();
+
+  config = {
+    mostrarEducacion: document.querySelector('.section-toggle[data-section="educacion"]').checked,
+    mostrarExperienciaLaboral: document.querySelector('.section-toggle[data-section="experienciaLaboral"]').checked,
+    mostrarExperienciaProyectos: document.querySelector('.section-toggle[data-section="proyecto"]').checked,
+    mostrarHabilidades: document.querySelector('.section-toggle[data-section="habilidades"]').checked,
+    mostrarIdiomas: document.querySelector('.section-toggle[data-section="idiomas"]').checked,
+    mostrarCertificaciones: document.querySelector('.section-toggle[data-section="certificacion"]').checked,
+    mostrarReferencias: document.querySelector('.section-toggle[data-section="referencias"]').checked,
+  };
+
+  // Llama a la función mostrarHTML y pasa el objeto config como argumento
+  document.getElementById("cv").innerHTML = cv.mostrarHTML(config);
+}
+
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
+}
+
+// Envuelve la función actualizarVistaCV en una función debounce
+const debouncedActualizarVistaCV = debounce(actualizarVistaCV, 300);
+
+// Selecciona todos los elementos con la clase 'input-cv'
+const inputsCV = document.querySelectorAll(".input-cv");
+
+// Agrega el event listener a cada elemento encontrado
+inputsCV.forEach((input) => {
+  input.addEventListener("input", debouncedActualizarVistaCV);
+});
+
+
+  document.getElementById("crearCV").addEventListener("click", async function () {
+    const nombre = document.getElementById("nombre").value;
+    const email = document.getElementById("email").value;
+    const telefono = document.getElementById("telefono").value;
+    const institucion = document.getElementById("institucion").value;
+    const empresa = document.getElementById("empresa").value;
+    const habilidades = agregarElementosDeTexto("habilidades");
+    const idiomas = agregarElementosDeTexto("idiomas");
+    const certificaciones = agregarElementosDeTexto("certificacion");
+    const referencias = agregarElementosDeTexto("referencias");
+    const titulo = document.getElementById("titulo").value;
+    const fechaInicioEducacion = document.getElementById("fechaInicioEducacion").value;
+    const fechaFinEducacion = document.getElementById("fechaFinEducacion").value;
+    const cargo = document.getElementById("cargo").value;
+    const fechaInicioExperiencia = document.getElementById("fechaInicioExperiencia").value;
+    const fechaFinExperiencia = document.getElementById("fechaFinExperiencia").value;
+    const tipo = document.getElementById("tipo").value;
+    const descripcion = document.getElementById("descripcion").value;
+    const proyecto = document.getElementById("proyecto").value;
+    const rol = document.getElementById("rol").value;
+    const nivelHabilidad = document.getElementById("nivelHabilidad").value;
+    const nivelIdioma = document.getElementById("nivelIdioma").value;
+    const institucionCertificacion = document.getElementById("institucionCertificacion").value;
+    const fechaCertificacion = document.getElementById("fechaCertificacion").value;
+    const relacion = document.getElementById("relacion").value;
+    const telRel = document.getElementById("telRel").value;
+    const emailRel = document.getElementById("emailRel").value;
     
-  
-    document.getElementById("cv").innerHTML = cv.mostrarHTML();
-  
     const data = {
       nombre: nombre,
       email: email,

@@ -4,110 +4,287 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Generador de CV</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-      <div class="container">
-        <h1 class="main-title">Generador de CV</h1>
-        <div class="row">
-          <div class="col-md-6 form-wrapper">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre">
-        <label for="email">Email:</label>
-        <input type="text" id="email">
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono">
-        <!-- Educación -->
-<label for="titulo">Título:</label>
-<input type="text" id="titulo">
-<label for="institucion">Universidad:</label>
-<input type="text" id="institucion">
-<label for="fechaInicioEducacion">Fecha de inicio:</label>
-<input type="date" id="fechaInicioEducacion">
-<label for="fechaFinEducacion">Fecha de finalización:</label>
-<input type="date" id="fechaFinEducacion">
-<label for="habilidades">Habilidades:</label>
-<input type="text" id="habilidades">
-<!-- Experiencia -->
-<label for="empresa">Empresa:</label>
-<input type="text" id="empresa">
-<label for="cargo">Cargo:</label>
-<input type="text" id="cargo">
-<label for="fechaInicioExperiencia">Fecha de inicio:</label>
-<input type="date" id="fechaInicioExperiencia">
-<label for="fechaFinExperiencia">Fecha de finalización:</label>
-<input type="date" id="fechaFinExperiencia">
-<label for="tipo">Tipo:</label>
-<select id="tipo">
-  <option value="laboral">Laboral</option>
-  <option value="proyecto">Proyecto</option>
-</select>
-<label for="descripcion">Descripción:</label>
-<textarea id="descripcion"></textarea>
-<label for="proyecto">Proyecto:</label>
-<input type="text" id="proyecto">
-<label for="rol">Rol:</label>
-<input type="text" id="rol">
-
-<!-- Habilidad -->
-<label for="nivelHabilidad">Nivel:</label>
-<select id="nivelHabilidad">
-  <option value="basico">Básico</option>
-  <option value="intermedio">Intermedio</option>
-  <option value="avanzado">Avanzado</option>
-</select>
-
-<!-- Idioma -->
-<label for="idiomas">Idioma:</label>
-<input type="text" id="idiomas">
-<label for="nivelIdioma">Nivel:</label>
-<select id="nivelIdioma">
-  <option value="basico">Básico</option>
-  <option value="intermedio">Intermedio</option>
-  <option value="avanzado">Avanzado</option>
-</select>
-
-<!-- Certificaciones -->
-<label for="certificacion">Certificación:</label>
-<input type="text" id="certificacion">
-<label for="institucionCertificacion">Institución:</label>
-<input type="text" id="institucionCertificacion">
-<label for="fechaCertificacion">Fecha de obtención:</label>
-<input type="date" id="fechaCertificacion">
-
-<!-- Referencia -->
-<label for="referencias">Referencias:</label>
-<input type="text" id="referencias">
-<label for="relacion">Relación:</label>
-<input type="text" id="relacion">
-<input type="text" id="relacion">
-
-
-<label for="emailRel">E-mail de relación:</label>
-<input type="text" id="emailRel">
-<label for="telRel">Tel de relación:</label>
-<input type="text" id="telRel">
-
-<button id="crearCV">Crear CV</button>
-</div>
-<div class="col-md-6 cv-display">
-  <div id="cv"></div>
-</div>
-</div>
-<div class="row mt-5">
-<div class="col-md-12">
-  <h2 class="cv-table-title">CVs creados anteriormente</h2>
-  <div class="cv-table">
-    <div id="nombresDeCVs"></div>
-    <ul id="cv-list"></ul>
-  </div>
-</div>
-</div>
-</div>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+  <script src="cv.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-  <script src="cv.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <div class="container">
+    <h1 class="main-title">Generador de CV</h1>
+    </div>
+    <div class="container">
+    <div class="row">
+      <div class="col-md-6 form-wrapper">
+        <div class="accordion" id="inputAccordion">
+          
+          <div class="card">
+            <div class="card-header" id="personalInfoHeading">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-bs-toggle="collapse" data-bs-target="#personalInfo" aria-expanded="false" aria-controls="personalInfo">
+                  Información personal
+                </button>
+              </h2>
+            </div>
+            <div id="personalInfo" class="collapse" aria-labelledby="personalInfoHeading" data-parent="#inputAccordion">
+              <div class="card-body">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="input-cv">
+                <label for="email">Email:</label>
+                <input type="text" id="email" class="input-cv">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" class="input-cv">
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="educationHeading">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-bs-toggle="collapse" data-bs-target="#education" aria-expanded="true" aria-controls="education">
+                  Educación
+                </button>
+              </h2>
+            </div>
+            <div id="education" class="collapse" aria-labelledby="educationHeading" data-parent="#inputAccordion">
+              <div class="card-body">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" class="input-cv">
+                <label for="institucion">Universidad:</label>
+                <input type="text" id="institucion" class="input-cv">
+                <label for="fechaInicioEducacion">Fecha de inicio:</label>
+                <input type="date" id="fechaInicioEducacion" class="input-cv">
+                <label for="fechaFinEducacion">Fecha de finalización:</label>
+                <input type="date" id="fechaFinEducacion" class="input-cv">
+                <label class="switch">
+                  <input type="checkbox" class="section-toggle input-cv" data-section="educacion" checked>
+                  <span class="slider round"></span>
+                </label>
+                <span>Incluir en CV</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="skillsHeading">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#skills" aria-expanded="false" aria-controls="skills">
+                  Habilidades
+                </button>
+              </h2>
+            </div>
+            <div id="skills" class="collapse" aria-labelledby="skillsHeading" data-parent="#inputAccordion">
+              <div class="card-body">
+                <label for="habilidades">Habilidades:</label>
+                <input type="text" id="habilidades" class="input-cv">
+                <label for="nivelHabilidad">Nivel:</label>
+                <select id="nivelHabilidad" class="input-cv">
+                  <option value="basico">Básico</option>
+                  <option value="intermedio">Intermedio</option>
+                  <option value="avanzado">Avanzado</option>
+                </select>
+                <label class="switch">
+                  <input type="checkbox" class="section-toggle input-cv" data-section="habilidades" checked>
+                  <span class="slider round"></span>
+                </label>
+                <span>Incluir en CV</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="experienceHeading">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#experience" aria-expanded="false" aria-controls="experience">
+                  Experiencia
+                </button>
+              </h2>
+            </div>
+            <div id="experience" class="collapse" aria-labelledby="experienceHeading" data-parent="#inputAccordion">
+              <div class="card-body">
+                <label for="empresa">Empresa:</label>
+                <input type="text" id="empresa" class="input-cv">
+                <label for="cargo">Cargo:</label>
+                <input type="text" id="cargo" class="input-cv">
+                <label for="fechaInicioExperiencia">Fecha de inicio:</label>
+                <input type="date" id="fechaInicioExperiencia" class="input-cv">
+                <label for="fechaFinExperiencia">Fecha de finalización:</label>
+                <input type="date" id="fechaFinExperiencia" class="input-cv">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" class="input-cv">
+                  <option value="laboral">Laboral</option>
+                  <option value="proyecto">Proyecto</option>
+                </select>
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" class="input-cv"></textarea>
+                <label class="switch">
+                  <input type="checkbox" class="section-toggle input-cv" data-section="experienciaLaboral" checked>
+                  <span class="slider round"></span>
+                </label>
+                <span>Incluir en CV</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="projectHeading">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#project" aria-expanded="false" aria-controls="project">
+                  Proyecto
+                </button>
+              </h2>
+            </div>
+            <div id="project" class="collapse" aria-labelledby="projectHeading" data-parent="#inputAccordion">
+              <div class="card-body">
+                <label for="proyecto">Proyecto:</label>
+                <input type="text" id="proyecto" class="input-cv">
+                <label for="rol">Rol:</label>
+                <input type="text" id="rol" class="input-cv">
+                <label class="switch">
+                  <input type="checkbox" class="section-toggle input-cv" data-section="proyecto" checked>
+                  <span class="slider round"></span>
+                </label>
+                <span>Incluir en CV</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="languageHeading">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#language" aria-expanded="false" aria-controls="language">
+
+                  Idioma
+                </button>
+              </h2>
+            </div>
+            <div id="language" class="collapse" aria-labelledby="languageHeading" data-parent="#inputAccordion">
+              <div class="card-body">
+                <label for="idiomas">Idioma:</label>
+                <input type="text" id="idiomas" class="input-cv">
+                <label for="nivelIdioma">Nivel:</label>
+                <select id="nivelIdioma" class="input-cv">
+                  <option value="basico">Básico</option>
+                  <option value="intermedio">Intermedio</option>
+                  <option value="avanzado">Avanzado</option>
+                  <option value="nativo">Nativo</option>
+                </select>
+                <label class="switch">
+                  <input type="checkbox" class="section-toggle input-cv" data-section="idiomas" checked>
+                  <span class="slider round"></span>
+                </label>
+                <span>Incluir en CV</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificaciones -->
+<div class="card">
+  <div class="card-header" id="headingCertificaciones">
+    <h2 class="mb-0">
+      
+      <button class="btn btn-link btn-block text-left collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCertificaciones" aria-expanded="true" aria-controls="collapseCertificaciones">
+
+        Certificaciones
+      </button>
+    </h2>
+  </div>
+
+
+  <div id="collapseCertificaciones" class="collapse" aria-labelledby="headingCertificaciones" data-parent="#inputAccordion">
+
+    <div class="card-body">
+      <label for="certificacion">Certificación:</label>
+      <textarea id="certificacion" rows="4" cols="50" class="input-cv"></textarea>
+      <label for="institucionCertificacion">Institución de certificación:</label>
+      <input type="text" id="institucionCertificacion" class="input-cv" />
+      <label for="fechaCertificacion">Fecha de certificación:</label>
+      <input type="date" id="fechaCertificacion"  class="input-cv"/>
+      <label class="switch">
+        <input type="checkbox" class="section-toggle input-cv" data-section="certificacion" checked>
+        <span class="slider round"></span>
+      </label>
+      <span>Incluir en CV</span>
+    </div>
+  </div>
+</div>
+<!-- Referencias -->
+<div class="card">
+  <div class="card-header" id="headingReferencia">
+    <h2 class="mb-0">
+      <button class="btn btn-link btn-block text-left collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#referencia" aria-expanded="false" aria-controls="referencia">
+
+        Referencias
+      </button>
+    </h2>
+  </div>
+
+  <div id="referencia" class="collapse" aria-labelledby="headingReferencia" data-parent="#inputAccordion">
+
+    <div class="card-body">
+      <label for="referencias">Referencia:</label>
+      <textarea id="referencias" rows="4" cols="50" class="input-cv"></textarea>
+      <label for="relacion">Relación:</label>
+      <input type="text" id="relacion" class="input-cv"/>
+      <label for="emailRel">Email:</label>
+      <input type="email" id="emailRel" class="input-cv"/>
+      <label for="telRel">Teléfono:</label>
+      <input type="tel" id="telRel" class="input-cv"/>
+      <label class="switch">
+        <input type="checkbox" class="section-toggle input-cv" data-section="referencias" checked>
+        <span class="slider round"></span>
+      </label>
+      <span>Incluir en CV</span>
+    </div>
+  </div>
+</div>
+
+          
+      
+        </div> <!-- End of accordion -->
+
+        <button id="crearCV">Crear CV</button>
+        <button id="descargarPDF">Descargar CV en PDF</button>
+       
+
+      </div>
+      <div class="col-md-6 cv-display">
+        <div id="cv"></div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <h2 class="cv-table-title">CVs creados anteriormente</h2>
+          <div class="cv-table">
+            <div id="nombresDeCVs"></div>
+            <ul id="cv-list"></ul>
+            <!-- Contenedor principal para la información del autor y el botón de otros proyectos -->
+<!-- Contenedor principal para la información del autor y el botón de otros proyectos -->
+<footer class="footer-container bg-light">
+  <div class="container py-3">
+    <!-- Información del autor -->
+    <div class="author-info mb-3">
+      <p>Made by Adel Del Valle</p>
+    </div>
+
+    <!-- Botón de otros proyectos -->
+    <div class="other-projects mb-3">
+      <a href="proyectos.html" class="btn btn-primary">Otros proyectos</a>
+    </div>
+  </div>
+</footer>
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+ 
 </body>
 </html>
+

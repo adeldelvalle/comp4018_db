@@ -1,113 +1,240 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
 body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
-  color: #333;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #84cf6e, #16c0b0, #ebf9fe);
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
 }
 
-.main-title,
-.cv-table-title {
-  font-family: 'Raleway', sans-serif;
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .main-title {
-  font-size: 36px;
-  font-weight: bold;
   text-align: center;
-  color: #6a097d;
+  margin-top: 20px;
   margin-bottom: 20px;
-  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .form-wrapper {
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .cv-display {
-  background: linear-gradient(135deg, #a6c1ee, #fbc2eb);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-input,
-textarea,
-select {
-  display: block;
-  width: 100%;
-  margin-bottom: 15px;
-  border: none;
-  border-radius: 20px;
-  background-color: #f0f0f0;
-  padding: 10px;
-  font-size: 14px;
-  color: #333;
-}
-
-button {
-  display: block;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #b8c6db, #f5f7fa);
-  color: #333;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: linear-gradient(135deg, #b8c6db, #f5f7fa, #b8c6db);
-}
-
-.container {
-  margin-top: 20px;
-}
-
-.cv-table-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #6a097d;
-  text-transform: uppercase;
+  border: 1px solid #dee2e6;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll;
+  max-height: 80vh;
 }
 
 .cv-table {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  text-align: center;
+}
+
+.cv-table-title {
+  text-align: center;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.card-header {
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.btn-link {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 1.1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+.card-body {
+  background-color: transparent;
+  padding: 20px;
+}
+
+input, select, textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 5px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#crearCV, #descargarPDF {
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: none;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#crearCV:hover, #descargarPDF:hover {
+  background-color: #0056b3;
+  box-shadow: none;
 }
 
 #cv-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
 }
 
 #cv-list li {
-  background: linear-gradient(135deg, #a6c1ee, #fbc2eb);
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #dee2e6;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
   cursor: pointer;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
 }
 
 #cv-list li:hover {
-  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
-@media (max-width: 576px) {
-  #cv-list {
-    flex-direction: column;
-  }
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.buttonless {
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+}
+
+.buttonless:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 29px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 21px;
+  width: 21px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.8); /* Cambiar el color de fondo a translúcido */
+  border-top: 1px solid #dee2e6;
+  backdrop-filter: blur(10px); /* Aplicar el efecto de desenfoque en navegadores que lo admitan */
+}
+
+.author-info {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.other-projects {
+  margin-bottom: 1rem;
+}
+
+.other-projects .btn {
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
 }
