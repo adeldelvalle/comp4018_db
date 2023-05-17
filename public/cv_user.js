@@ -1,6 +1,6 @@
 async function displayCV(userId) {
     try {
-      const response = await fetch(`/mynode/fetchCV/${userId}`);
+      const response = await fetch(`/fetchCV/${userId}`);
       const cvData = await response.json();
   
       // Mostrar el título "Vista Previa del Resumen"
@@ -105,7 +105,7 @@ async function displayCV(userId) {
   
     // Enviar los datos al servidor
     try {
-      const response = await fetch(`/mynode/updateCV/${userId}`, {
+      const response = await fetch(`/updateCV/${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

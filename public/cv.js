@@ -274,7 +274,7 @@ class CurriculumVitae {
   
   async function fetchAllCVs() {
     try {
-      const response = await fetch('/mynode/fetchAllCVs');
+      const response = await fetch('/fetchAllCVs');
       const cvs = await response.json();
   
       const cvListElement = document.getElementById('cv-list');
@@ -293,7 +293,7 @@ class CurriculumVitae {
   
 
   function redirectToCV(userId) {
-    window.location.href = `/mynode/cv_user.html?userId=${userId}`;
+    window.location.href = `cv_user.html?userId=${userId}`;
   }
   
 
@@ -473,7 +473,7 @@ inputsCV.forEach((input) => {
     };
 
     try {
-      const response = await fetch('/mynode/saveCV', {
+      const response = await fetch('/saveCV', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
